@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragment/header :: header"></div>
+</head>
+<body>
+<div th:replace="/fragment/navigation :: nav"></div>
+<div class="container">
+    <form action="/users/login" method="post">
+        <div class="mb-3">
+            <label for="userId" class="form-label">아이디</label>
+            <input type="text" class="form-control" name="userId" placeholder="아이디">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">패스워드</label>
+            <input type="password" class="form-control" name="password" placeholder="패스워드">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+</div>
+<footer th:replace="/fragment/footer :: footer"></footer>
+</body>
+</html>
