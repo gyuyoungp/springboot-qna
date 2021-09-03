@@ -11,9 +11,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     private String userId;
+
     private String password;
     private String username;
     private String email;
+
+    public void update(User updateUser) {
+        this.password = updateUser.password;
+        this.username = updateUser.username;
+        this.email = updateUser.email;
+    }
 }

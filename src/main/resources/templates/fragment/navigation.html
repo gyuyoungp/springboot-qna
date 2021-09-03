@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                <p style="float: left" th:if="${session.user == null}">
+                <p style="float: left" th:if="${session.sessionUser == null}">
                 <li class="nav-item">
                     <a class="nav-link" href="/users/login">로그인</a>
                 </li>
@@ -18,8 +18,8 @@
                 </li>
                 </p>
 
-                <p style="float: left" th:if="${session.user != null}">
-                    <li th:if="${session.user != null}">
+                <p style="float: left" th:if="${session.sessionUser != null}">
+                    <li th:if="${session.sessionUser != null}">
                 <li class="nav-item">
                     <a class="nav-link" href="/users">회원목록</a>
                 </li>
@@ -27,7 +27,7 @@
                     <a class="nav-link" href="/users/logout">로그아웃</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/update">개인정보수정</a>
+                    <a class="nav-link" th:href="@{'/users/' + ${session.sessionUser.userId} + '/update'}">개인정보수정</a>
                 </li>
                 </li>
                 </p>
