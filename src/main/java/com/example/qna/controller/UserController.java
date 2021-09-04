@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/new")
     public String createForm() {
-        return "loginForm";
+        return "/users/loginForm";
     }
 
     @PostMapping("/new")
@@ -46,7 +46,7 @@ public class UserController {
     public String login(String userId, String password, HttpSession session) {
         User user = userRepository.findByUserId(userId);
         if (user == null || !password.equals(user.getPassword()))
-            return "redirect:/users/loginForm";
+            return "redirect:/users/login";
         session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user);
         return "redirect:/";
     }
@@ -77,11 +77,15 @@ public class UserController {
     public String update(@PathVariable String userId, User updateUser, HttpSession session) {
         User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
         if (user == null) {
-            return "redirect:/users/loginForm";
+            return "redirect:/users/login";
         }
 
         if (!userId.equals(user.getUserId())) {
             throw new IllegalStateException("You can't update");
+        }
+
+        if (!updateUser.getPassword().equals(user.getPassword())) {
+            return "redirect:/";
         }
 
         user.update(updateUser);

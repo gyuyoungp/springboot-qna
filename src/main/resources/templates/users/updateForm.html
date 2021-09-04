@@ -6,11 +6,10 @@
 <body>
 <div th:replace="/fragment/navigation :: nav"></div>
 <div class="container">
-    <form th:action="@{'/users/' + ${session.sessionUser.userId} + '/update'}" method="post">
+    <form th:action="@{'/users/' + ${user.userId} + '/update'}" method="post">
         <div class="mb-3">
-            <label for="userId" class="form-label">아이디</label>
-            <input type="text" class="form-control" name="userId" placeholder="아이디"
-                   th:value="${session.sessionUser.userId}">
+            <input type="hidden" class="form-control" name="userId" placeholder="아이디"
+                   th:value="${user.userId}">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">패스워드</label>
@@ -19,12 +18,12 @@
         <div class="mb-3">
             <label for="username" class="form-label">이름</label>
             <input type="text" class="form-control" name="username" placeholder="이름"
-                   th:value="${session.sessionUser.username}">
+                   th:value="${user.username}">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">이메일</label>
             <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
-                   placeholder="hello@email.com" th:value="${session.sessionUser.email}">
+                   placeholder="hello@email.com" th:value="${user.email}">
         </div>
         <button type="submit" class="btn btn-primary">개인정보수정</button>
     </form>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragment/header :: header"></div>
+</head>
+<body>
+<div th:replace="/fragment/navigation :: nav"></div>
+
+<div class="container">
+    <form action="/questions/form" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" placeholder="제목">
+        </div>
+        <div class="mb-3">
+            <label for="contents" class="form-label">내용</label>
+            <textarea style="resize: none;" class="form-control" name="contents" rows="15"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary">작성</button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="/fragment/footer :: footer"></footer>
+</body>
+</html>
