@@ -6,7 +6,9 @@ import com.example.qna.repository.QuestionRepository;
 import com.example.qna.utils.HttpSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,12 +37,17 @@ public class QuestionController {
             return "redirect:/users/login";
         }
 
-        Question question = new Question(user.getUsername(), title, contents);
+        Question question = new Question(user, title, contents);
         questionRepository.save(question);
         System.out.println(question);
 
         return "redirect:/";
     }
 
+    @GetMapping("/{id}")
+    public String show(@PathVariable Long id, Model model) {
+
+        return "/questions/show";
+    }
 
 }

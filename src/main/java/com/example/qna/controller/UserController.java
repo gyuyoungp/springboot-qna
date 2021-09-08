@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/new")
     public String createForm() {
-        return "/users/loginForm";
+        return "/users/form";
     }
 
     @PostMapping("/new")

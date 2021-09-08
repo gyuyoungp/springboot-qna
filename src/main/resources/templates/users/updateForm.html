@@ -5,29 +5,35 @@
 </head>
 <body>
 <div th:replace="/fragment/navigation :: nav"></div>
-<div class="container">
-    <form th:action="@{'/users/' + ${user.userId} + '/update'}" method="post">
-        <div class="mb-3">
-            <input type="hidden" class="form-control" name="userId" placeholder="아이디"
-                   th:value="${user.userId}">
+
+<div class="container" id="main">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default content-main">
+            <form name="question" method="post" th:action="@{'/users/' + ${user.userId} + '/update'}">
+                <input type="hidden" name="_method" value="put"/>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="userId" name="userId" th:value="${user.userId}">
+                </div>
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="패스워드">
+                </div>
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input class="form-control" id="name" name="name" placeholder="이름" th:value="${user.name}">
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="이메일"
+                           th:value="${user.email}">
+                </div>
+                <button type="submit" class="btn btn-success clearfix pull-right">개인정보수정</button>
+                <div class="clearfix"></div>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">패스워드</label>
-            <input type="password" class="form-control" name="password" placeholder="패스워드">
-        </div>
-        <div class="mb-3">
-            <label for="username" class="form-label">이름</label>
-            <input type="text" class="form-control" name="username" placeholder="이름"
-                   th:value="${user.username}">
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">이메일</label>
-            <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
-                   placeholder="hello@email.com" th:value="${user.email}">
-        </div>
-        <button type="submit" class="btn btn-primary">개인정보수정</button>
-    </form>
+    </div>
 </div>
+
 <footer th:replace="/fragment/footer :: footer"></footer>
 </body>
 </html>
