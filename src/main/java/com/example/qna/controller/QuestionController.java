@@ -47,7 +47,56 @@ public class QuestionController {
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
 
+        model.addAttribute("question", questionRepository.findById(id).get());
         return "/questions/show";
+    }
+
+    @GetMapping("/{id}/form")
+    public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
+        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        Question question = questionRepository.findById(id).get();
+        if (user.equals(question.getId())) {
+            return "redirect:/users/login";
+        }
+
+        model.addAttribute("question", question);
+        return "questions/updateForm";
+    }
+
+    @PostMapping("/{id}")
+    public String update(@PathVariable Long id, String title, String contents, HttpSession session) {
+
+        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        Question question = questionRepository.findById(id).get();
+        if (user.equals(question.getId())) {
+            return "redirect:/users/login";
+        }
+
+        question.update(title, contents);
+        questionRepository.save(question);
+        return String.format("redirect:/questions/%d", id);
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id, HttpSession session) {
+
+        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        Question question = questionRepository.findById(id).get();
+        if (user.equals(question.getId())) {
+            return "redirect:/users/login";
+        }
+
+        questionRepository.delete(question);
+        return "redirect:/";
     }
 
 }

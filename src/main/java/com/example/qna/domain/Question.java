@@ -24,7 +24,7 @@ public class Question {
 
     private String contents;
 
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+//    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime createDate;
 
     public Question(User writer, String title, String contents) {
@@ -32,5 +32,10 @@ public class Question {
         this.title = title;
         this.contents = contents;
         this.createDate = LocalDateTime.now();
+    }
+
+    public void update(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
     }
 }
