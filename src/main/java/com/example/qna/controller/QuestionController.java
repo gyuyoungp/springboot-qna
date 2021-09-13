@@ -46,9 +46,8 @@ public class QuestionController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
-
         model.addAttribute("question", questionRepository.findById(id).get());
-        return "/questions/show";
+        return "questions/show";
     }
 
     @GetMapping("/{id}/form")

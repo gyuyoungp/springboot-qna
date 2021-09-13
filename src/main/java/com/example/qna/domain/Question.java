@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,10 +23,15 @@ public class Question {
 
     private String title;
 
+    @Lob
     private String contents;
 
-//    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    //    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime createDate;
+
+    @OneToMany(mappedBy = "question")
+//    @OrderBy("id ASC")
+    private List<Answer> answers;
 
     public Question(User writer, String title, String contents) {
         this.writer = writer;
