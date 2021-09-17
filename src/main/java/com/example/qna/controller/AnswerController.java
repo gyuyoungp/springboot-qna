@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/questions/{questionId}/answers")
@@ -40,6 +38,23 @@ public class AnswerController {
             return "redirect:/users/login";
         }
         answerRepository.save(new Answer(user, question, contents));
+        return String.format("redirect:/questions/%d", questionId);
+    }
+
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long questionId, @PathVariable Long id, HttpSession session) {
+        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+
+        Answer answer = answerRepository.findById(id).get();
+        if(!user.equals(answer.getWriter())) {
+            return "redirect:/users/login";
+        }
+        answerRepository.delete(answer);
+
         return String.format("redirect:/questions/%d", questionId);
     }
 }

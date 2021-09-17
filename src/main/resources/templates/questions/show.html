@@ -64,7 +64,7 @@
                                         </li>
                                         <li>
                                             <a class="link-delete-article"
-                                               href="/api/questions/{{question.id}}/answers/{{id}}">삭제</a>
+                                               th:href="@{'/questions/' + ${question.id} + '/answers/delete/' + ${answer.id}}">삭제</a>
                                         </li>
                                     </ul>
                                 </div>
