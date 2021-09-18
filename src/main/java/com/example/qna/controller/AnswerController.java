@@ -8,7 +8,7 @@ import com.example.qna.repository.QuestionRepository;
 import com.example.qna.utils.HttpSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +25,9 @@ public class AnswerController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    /**
+     * 댓글 작성
+     */
     @PostMapping("")
     public String create(@PathVariable Long questionId, String contents, HttpSession session) {
 
@@ -41,8 +44,10 @@ public class AnswerController {
         return String.format("redirect:/questions/%d", questionId);
     }
 
-
-    @GetMapping("/delete/{id}")
+    /**
+     * 댓글 삭제
+     */
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable Long questionId, @PathVariable Long id, HttpSession session) {
         User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
         if (user == null) {
@@ -50,7 +55,7 @@ public class AnswerController {
         }
 
         Answer answer = answerRepository.findById(id).get();
-        if(!user.equals(answer.getWriter())) {
+        if (!user.equals(answer.getWriter())) {
             return "redirect:/users/login";
         }
         answerRepository.delete(answer);

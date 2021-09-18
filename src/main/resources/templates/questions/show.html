@@ -25,10 +25,10 @@
                         <ul class="article-util-list">
                             <li>
                                 <a class="link-modify-article"
-                                   th:href="@{'/questions/' + ${question.id} + '/form'}">수정</a>
+                                   th:href="@{'/questions/' + ${question.id} + '/update'}">수정</a>
                             </li>
                             <li>
-                                <form class="form-delete" th:action="@{'/questions/' + ${question.id} + '/delete'}"
+                                <form class="form-delete" th:action="@{'/questions/' + ${question.id}}"
                                       method="post">
                                     <input type="hidden" name="_method" value="delete">
                                     <button class="link-delete-article" type="submit">삭제</button>
@@ -60,11 +60,11 @@
                                     <ul class="article-util-list">
                                         <li>
                                             <a class="link-modify-article"
-                                               href="/questions/413/answers/1405/form">수정</a>
+                                               th:href="@{'/questions/' + ${question.id} + '/answers/update/' + ${answer.id}}">수정</a>
                                         </li>
                                         <li>
                                             <a class="link-delete-article"
-                                               th:href="@{'/questions/' + ${question.id} + '/answers/delete/' + ${answer.id}}">삭제</a>
+                                               th:href="@{'/questions/' + ${question.id} + '/answers/' + ${answer.id}}">삭제</a>
                                         </li>
                                     </ul>
                                 </div>

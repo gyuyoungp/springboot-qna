@@ -1,6 +1,5 @@
 package com.example.qna.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
