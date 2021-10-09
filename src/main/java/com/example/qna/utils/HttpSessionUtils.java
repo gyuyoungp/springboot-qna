@@ -1,6 +1,6 @@
 package com.example.qna.utils;
 
-import com.example.qna.domain.User;
+import com.example.qna.user.User;
 
 import javax.servlet.http.HttpSession;
 

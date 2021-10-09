@@ -1,4 +1,4 @@
-package com.example.qna.domain;
+package com.example.qna.user;
 
 import lombok.Data;
 

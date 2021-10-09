@@ -1,6 +1,5 @@
-package com.example.qna.repository;
+package com.example.qna.user;
 
-import com.example.qna.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

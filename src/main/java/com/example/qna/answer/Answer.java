@@ -1,5 +1,7 @@
-package com.example.qna.domain;
+package com.example.qna.answer;
 
+import com.example.qna.question.Question;
+import com.example.qna.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

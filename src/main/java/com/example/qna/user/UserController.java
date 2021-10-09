@@ -1,7 +1,5 @@
-package com.example.qna.controller;
+package com.example.qna.user;
 
-import com.example.qna.domain.User;
-import com.example.qna.repository.UserRepository;
 import com.example.qna.utils.HttpSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

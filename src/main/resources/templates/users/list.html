@@ -1,10 +1,8 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="/fragment/header :: header"></div>
-</head>
+<div th:replace="~{fragment/header :: header}"></div>
 <body>
-<div th:replace="/fragment/navigation :: nav"></div>
+<div th:replace="~{fragment/navigation :: nav}"></div>
 
 <div class="container" id="main">
     <div class="col-md-10 col-md-offset-1">
@@ -32,6 +30,6 @@
     </div>
 </div>
 
-<footer th:replace="/fragment/footer :: footer"></footer>
+<div th:replace="~{fragment/footer :: footer}"></div>
 </body>
 </html>

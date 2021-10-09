@@ -1,36 +1,55 @@
-<nav th:fragment="nav" class="navbar navbar-fixed-top header">
-    <div class="col-md-12">
-        <div class="navbar-header">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
 
-            <a href="/" class="navbar-brand">QnA</a>
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
-                <i class="glyphicon glyphicon-search"></i>
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Qna</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/login">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/new">회원가입</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse1">
+    </nav>
+    <br>
+</div>
 
-            <form class="navbar-form pull-left">
-                <div class="input-group" style="max-width:470px;">
-                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default btn-primary" type="submit"><i
-                                class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
 
-            <ul class="nav navbar-nav navbar-right">
-                <p th:if="${session.sessionUser == null}">
-                <li><a href="/users/login" role="button">로그인</a></li>
-                <li><a href="/users/new" role="button">회원가입</a></li>
-                </p>
-                <p th:if="${session.sessionUser != null}">
-                <li><a href="/users/logout" role="button">로그아웃</a></li>
-                <li><a th:href="@{'/users/' + ${session.sessionUser.userId} + '/update'}">개인정보수정</a></li>
-                </p>
-            </ul>
+<!--            <form class="navbar-form pull-left">-->
+<!--                <div class="input-group" style="max-width:470px;">-->
+<!--                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">-->
+<!--                    <div class="input-group-btn">-->
+<!--                        <button class="btn btn-default btn-primary" type="submit"><i-->
+<!--                                class="glyphicon glyphicon-search"></i></button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
 
-        </div>
-    </div>
-</nav>
+<!--            <ul class="nav navbar-nav navbar-right">-->
+<!--                <p th:if="${session.sessionUser == null}">-->
+<!--                <li><a href="/users/login" role="button">로그인</a></li>-->
+<!--                <li><a href="/users/new" role="button">회원가입</a></li>-->
+<!--                </p>-->
+<!--                <p th:if="${session.sessionUser != null}">-->
+<!--                <li><a href="/users/logout" role="button">로그아웃</a></li>-->
+<!--                <li><a th:href="@{'/users/' + ${session.sessionUser.userId} + '/update'}">개인정보수정</a></li>-->
+<!--                </p>-->
+<!--            </ul>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+</body>
+</html>

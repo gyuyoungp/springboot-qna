@@ -1,10 +1,8 @@
-package com.example.qna.controller;
+package com.example.qna.answer;
 
-import com.example.qna.domain.Answer;
-import com.example.qna.domain.Question;
-import com.example.qna.domain.User;
-import com.example.qna.repository.AnswerRepository;
-import com.example.qna.repository.QuestionRepository;
+import com.example.qna.question.Question;
+import com.example.qna.user.User;
+import com.example.qna.question.QuestionRepository;
 import com.example.qna.utils.HttpSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
