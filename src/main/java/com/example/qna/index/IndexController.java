@@ -1,9 +1,7 @@
 package com.example.qna.index;
 
-import com.example.qna.question.Question;
 import com.example.qna.question.QuestionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;

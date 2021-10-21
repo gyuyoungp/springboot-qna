@@ -23,11 +23,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-//    @Transactional(readOnly = true)
-//    public User login(User user) {
-//        return userRepository.findByUserIdAndPassword(user.getUserId(), user.getPassword());
-//    }
-
     @Transactional(readOnly = true)
     public List<User> findAll() {
         return userRepository.findAll();
@@ -36,7 +31,9 @@ public class UserService {
     @Transactional
     public void update(User user) {
         User persistence = userRepository.findById(user.getId()).orElseThrow(() -> new IllegalArgumentException("회원 찾기 실패"));
-        persistence.setPassword(user.getPassword());
+        String rawPassword = user.getPassword();
+        String encPassword = passwordEncoder.encode(rawPassword);
+        persistence.setPassword(encPassword);
         persistence.setNickname(user.getNickname());
         persistence.setEmail(user.getEmail());
     }

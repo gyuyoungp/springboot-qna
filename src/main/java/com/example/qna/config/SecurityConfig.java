@@ -27,21 +27,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(principalDetailService).passwordEncoder(passwordEncoder());
+//        auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("1234")).roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/users/**", "/js/**", "/", "/webjars/**", "/api/users/**", "/h2-console/**")
+                .antMatchers("/", "/js/**", "/webjars/**", "/users/**", "/api/users/**", "/h2-console/**")
                 .permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/users/login")
+                .loginPage("/users/loginForm")
                 .loginProcessingUrl("/users/login")
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+                .and()
+                .logout()
+                .logoutUrl("/users/logout")
+                .logoutSuccessUrl("/");
         http.headers().frameOptions().disable();
     }
+
+
 }

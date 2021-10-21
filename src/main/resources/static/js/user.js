@@ -4,10 +4,6 @@ let index = {
             this.save();
         });
 
-        $("#btn-login").on("click", () => {
-            this.login();
-        });
-
         $("#btn-update").on("click", () => {
             this.update();
         });
@@ -34,26 +30,6 @@ let index = {
             alert(JSON.stringify(error));
         });
     },
-
-    // login: function () {
-    //     let data = {
-    //         username: $("#username").val(),
-    //         password: $("#password").val(),
-    //     };
-    //
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/api/users/login",
-    //         data: JSON.stringify(data),
-    //         contentType: "application/json; charset=utf-8",
-    //         dataType: "json"
-    //     }).done(function (response) {
-    //         alert("로그인이 완료되었습니다.");
-    //         location.href = "/";
-    //     }).fail(function (error) {
-    //         alert(JSON.stringify(error));
-    //     });
-    // },
 
     update: function () {
         let data = {
