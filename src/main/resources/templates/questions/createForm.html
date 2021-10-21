@@ -5,24 +5,33 @@
 <div th:replace="~{fragment/navigation :: nav}"></div>
 
 <div class="container">
-    <form action="/questions" method="post">
+    <form>
         <div class="mb-3">
             <label for="title" class="form-label">제목</label>
             <input type="text" class="form-control" id="title" name="title">
         </div>
         <div class="mb-3">
-            <label for="contents" class="form-label">내용</label>
-            <textarea class="form-control" id="contents" name="contents" rows="15"></textarea>
-        </div>
-        <div class="row">
-            <div class="col-auto ms-auto"></div>
-            <div class="col-auto">
-                <input class="btn btn-primary" type="submit" role="button" value="작성">
-            </div>
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control summernote" id="content" name="content" rows="15"></textarea>
         </div>
     </form>
+
+    <div class="row">
+        <div class="col-auto ms-auto"></div>
+        <div class="col-auto">
+            <button id="btn-save" class="btn btn-primary">작성</button>
+        </div>
+    </div>
+
+    <script>
+        $('.summernote').summernote({
+            tabsize: 2,
+            height: 400,
+        });
+    </script>
 </div>
 
+<script src="/js/question.js"></script>
 <div th:replace="~{fragment/footer :: footer}"></div>
 </body>
 </html>

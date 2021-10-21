@@ -2,15 +2,20 @@ package com.example.qna.answer;
 
 import com.example.qna.question.Question;
 import com.example.qna.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
-@Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class Answer {
 
     @Id
@@ -18,25 +23,23 @@ public class Answer {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
-    private User writer;
+    @JoinColumn(name = "userId")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_to_question"))
+    @JoinColumn(name = "questionId")
     private Question question;
 
-
     @Lob
-    private String contents;
+    private String content;
 
-    private LocalDateTime createDate;
+    @CreationTimestamp
+    private Timestamp createDate;
 
-    public Answer(User writer, Question question, String contents) {
-        this.writer = writer;
-        this.contents = contents;
+    public Answer(User user, Question question, String content) {
+        this.user = user;
+        this.content = content;
         this.question = question;
-        this.createDate = LocalDateTime.now();
     }
-
 
 }

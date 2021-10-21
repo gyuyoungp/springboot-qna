@@ -2,113 +2,58 @@ package com.example.qna.question;
 
 import com.example.qna.user.User;
 import com.example.qna.utils.HttpSessionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RequiredArgsConstructor
 @RequestMapping("/questions")
+@Controller
 public class QuestionController {
 
-    @Autowired
-    private QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
-    /**
-     * 질문 폼 이동
-     */
-    @GetMapping("/new")
+    @GetMapping("/createForm")
     public String createForm(HttpSession session) {
-        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
+        User user = (User) session.getAttribute("principal");
         if (user == null) {
             return "redirect:/users/login";
         }
         return "questions/createForm";
     }
 
-    /**
-     * 질문 작성
-     */
-    @PostMapping("")
-    public String create(String title, String contents, HttpSession session) {
-        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
-        if (user == null) {
-            return "redirect:/users/login";
-        }
-
-        Question question = new Question(user, title, contents);
-        questionRepository.save(question);
-        System.out.println(question);
-
-        return "redirect:/";
-    }
-
-    /**
-     * 질문 조회
-     */
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("question", questionRepository.findById(id).get());
+        model.addAttribute("question", questionService.findById(id));
         return "questions/show";
     }
 
-    /**
-     * 질문 수정 폼 이동
-     */
     @GetMapping("/{id}/update")
     public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
-        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
-        if (user == null) {
-            return "redirect:/users/login";
-        }
-        Question question = questionRepository.findById(id).get();
-        if (user.equals(question.getId())) {
-            return "redirect:/users/login";
-        }
-
-        model.addAttribute("question", question);
+        User principal = (User) session.getAttribute("principal");
+        if (principal == null) return "redirect:/users/login";
+        model.addAttribute("question", questionService.findById(id));
         return "questions/updateForm";
     }
 
-    /**
-     * 질문 수정
-     */
-    @PutMapping("/{id}")
-    public String update(@PathVariable Long id, String title, String contents, HttpSession session) {
 
-        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
-        if (user == null) {
-            return "redirect:/users/login";
-        }
-        Question question = questionRepository.findById(id).get();
-        if (user.equals(question.getId())) {
-            return "redirect:/users/login";
-        }
-
-        question.update(title, contents);
-        questionRepository.save(question);
-        return String.format("redirect:/questions/%d", id);
-    }
-
-    /**
-     * 질문 삭제
-     */
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id, HttpSession session) {
-
-        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
-        if (user == null) {
-            return "redirect:/users/login";
-        }
-        Question question = questionRepository.findById(id).get();
-        if (user.equals(question.getId())) {
-            return "redirect:/users/login";
-        }
-
-        questionRepository.delete(question);
-        return "redirect:/";
-    }
+//    @DeleteMapping("/{id}")
+//    public String delete(@PathVariable Long id, HttpSession session) {
+//
+//        User user = (User) session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
+//        if (user == null) {
+//            return "redirect:/users/login";
+//        }
+//        Question question = questionRepository.findById(id).get();
+//        if (user.equals(question.getId())) {
+//            return "redirect:/users/login";
+//        }
+//
+//        questionRepository.delete(question);
+//        return "redirect:/";
+//    }
 
 }
