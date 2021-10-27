@@ -1,13 +1,11 @@
 package com.example.qna.question;
 
-import com.example.qna.user.User;
-import com.example.qna.utils.HttpSessionUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @RequestMapping("/questions")
@@ -17,11 +15,7 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping("/createForm")
-    public String createForm(HttpSession session) {
-        User user = (User) session.getAttribute("principal");
-        if (user == null) {
-            return "redirect:/users/login";
-        }
+    public String createForm() {
         return "questions/createForm";
     }
 
@@ -32,9 +26,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}/update")
-    public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
-        User principal = (User) session.getAttribute("principal");
-        if (principal == null) return "redirect:/users/login";
+    public String updateForm(@PathVariable Long id, Model model) {
         model.addAttribute("question", questionService.findById(id));
         return "questions/updateForm";
     }

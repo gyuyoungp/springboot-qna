@@ -1,15 +1,11 @@
 package com.example.qna.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-@Builder
-public class ResponseDto<T> {
-    int status;
-    T data;
+public class ResponseDto {
+    private int status;
+    private String message;
 }

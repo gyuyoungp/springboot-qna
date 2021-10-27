@@ -31,9 +31,6 @@ public class User {
     @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = false, length = 50)
-    private String email;
-
     @ColumnDefault("'ROLE_USER'")
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -44,6 +41,5 @@ public class User {
     public void update(User updateUser) {
         this.password = updateUser.password;
         this.nickname = updateUser.nickname;
-        this.email = updateUser.email;
     }
 }

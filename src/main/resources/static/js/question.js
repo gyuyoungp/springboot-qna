@@ -38,7 +38,7 @@ let index = {
     },
 
     deleteById: function () {
-        let questionId = $("#questionId").text();
+        let questionId = $("#questionId").val();
 
         $.ajax({
             type: "delete",
@@ -69,7 +69,7 @@ let index = {
             dataType: "json"
         }).done(function (response) {
             alert("글수정이 완료되었습니다.");
-            location.href = "/";
+            location.href = `/questions/${questionId}`;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

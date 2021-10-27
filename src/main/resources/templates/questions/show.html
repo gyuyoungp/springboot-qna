@@ -7,20 +7,20 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title" th:text="${question.title}"></h5>
+            <h1 class="card-title" th:text="${question.title}"></h1>
             <h6 class="card-subtitle mb-2 text-muted"
                 th:text="${question.createDate}"></h6>
-            <p id="questionId" th:text="${question.id}"></p>
-            <p class="card-text" th:text="${question.user.getNickname}"></p>
+            <input type="hidden" id="questionId" th:value="${question.id}"/>
+            <p class="card-text" th:text="'작성자:' + ${question.user.getNickname}"></p>
+            <hr>
             <p class="card-text" th:utext="${question.content}"></p>
             <div class="row">
-                <div class="col-auto ms-auto"></div>
-                <div class="col-auto" th:if="${question.user.id == session.principal.id}">
-                    <a th:href="@{'/questions/' + ${question.id} + '/update'}" class="btn btn-primary"
-                       role="button">수정</a>
-                    <button id="btn-delete" class="btn btn-primary">삭제</button>
-                </div>
-                <div class="col-auto">
+                <div class="col-auto ms-auto">
+                    <span th:if="${question.user.id == #authentication.principal.user.id}">
+                        <a th:href="@{'/questions/' + ${question.id} + '/update'}" class="btn btn-primary"
+                           role="button">수정</a>
+                        <button id="btn-delete" class="btn btn-primary">삭제</button>
+                    </span>
                     <button class="btn btn-primary" onclick="history.back()">목록</button>
                 </div>
             </div>
@@ -48,19 +48,13 @@
                 <small>
                     <strong th:text="${answer.user.getNickname}"></strong>
                     <span th:text="${answer.createDate}"></span>
+                    <span th:if="${answer.user.id == #authentication.principal.user.id}">
+                    <button th:onclick="|index.answerDelete(${question.id},${answer.id})|"
+                            class="btn btn-link">삭제</button>
+                </span>
                 </small>
                 <br>
                 <span th:text="${answer.content}"></span>
-                <p>
-                    <small>
-<!--                        <a class="text-decoration-none"-->
-<!--                           th:href="@{'/questions/' + ${question.id} + '/answers/update/' + ${answer.id}}">수정</a>-->
-                        <button th:onclick="|index.answerDelete(${question.id},${answer.id})|" class="btn btn-primary">삭제
-                        </button>
-                        <!--                        th:href="@{'/api/questions/' + ${question.id} + '/answers/' + ${answer.id}}">삭제</a>-->
-                    </small>
-                </p>
-                <hr>
             </article>
         </div>
     </div>
